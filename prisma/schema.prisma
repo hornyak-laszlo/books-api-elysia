@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Book {
+  id          String          @id @default(cuid())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  title       String
+  isbn        String          @unique
+  publishedAt DateTime
+  price       Decimal
+  inStock     Boolean
+  reviews     Review[]
+  genres      GenresOnBooks[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bookId    String
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  rating    Int
+  text      String
+}
+
+model Genre {
+  id        String          @id @default(cuid())
+  createdAt DateTime        @default(now())
+  name      String          @unique
+  books     GenresOnBooks[]
+}
+
+model GenresOnBooks {
+  bookId  String
+  book    Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  genreId String
+  genre   Genre  @relation(fields: [genreId], references: [id])
+
+  @@id([bookId, genreId])
+}

@@ -1,0 +1,447 @@
+{
+  "info": {
+    "_postman_id": "43f352f3-2bea-4f4b-8a74-da5831531546",
+    "name": "Books-API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "8000"
+  },
+  "item": [
+    {
+      "name": "books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson).to.be.an(\"array\");",
+              "    pm.expect(responseJson.length).to.eql(4);",
+              "    pm.expect(responseJson[0].id).to.eql(\"clbook001\");",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": ["{{baseURL}}"],
+          "path": ["books"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "books/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson.id).to.eql(\"clbook001\");",
+              "    pm.expect(responseJson.price).to.eql(\"19.99\");",
+              "    pm.expect(responseJson.reviews.length).to.eql(2);",
+              "    pm.expect(responseJson.genres.length).to.eql(1);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/clbook001",
+          "host": ["{{baseURL}}"],
+          "path": ["books", "clbook001"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson.title).to.eql(\"Test\");",
+              "    pm.expect(responseJson.price).to.eql(\"16.99\");",
+              "    pm.expect(responseJson.createdAt).to.not.be.undefined;",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Test\",\n    \"isbn\": \"Test\",\n    \"publishedAt\": \"2025-10-27\",\n    \"price\": 16.99,\n    \"inStock\": true,\n    \"genres\": [\n        \"clgenfntsy001\",\n        \"clgenmstry003\"\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books",
+          "host": ["{{baseURL}}"],
+          "path": ["books"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "books/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson.price).to.eql(\"18.99\");",
+              "    pm.expect(responseJson.inStock).to.eql(false);",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"price\": 18.99,\n    \"inStock\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/books/clbook001",
+          "host": ["{{baseURL}}"],
+          "path": ["books", "clbook001"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "books/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson).to.eql({});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/books/clbook001",
+          "host": ["{{baseURL}}"],
+          "path": ["books", "clbook001"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "genres",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson).to.be.an(\"array\");",
+              "    pm.expect(responseJson.length).to.eql(4);",
+              "    pm.expect(responseJson[0].id).to.eql(\"clgenfntsy001\");",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/genres",
+          "host": ["{{baseURL}}"],
+          "path": ["genres"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "genres",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson.name).to.eql(\"Test\");",
+              "    pm.expect(responseJson.createdAt).to.not.be.undefined;",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\": \"Test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/genres",
+          "host": ["{{baseURL}}"],
+          "path": ["genres"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "genres/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson).to.eql({});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/genres/clgennonfic004",
+          "host": ["{{baseURL}}"],
+          "path": ["genres", "clgennonfic004"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reviews",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson.bookId).to.eql(\"clbook001\");",
+              "    pm.expect(responseJson.createdAt).to.not.be.undefined;",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"bookId\": \"clbook001\",\n    \"rating\": 5,\n    \"text\": \"Really good!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/reviews",
+          "host": ["{{baseURL}}"],
+          "path": ["reviews"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "reviews/:id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"The response has all properties\", () => {",
+              "    const responseJson = pm.response.json();",
+              "",
+              "    pm.expect(pm.response.code).to.eql(200);",
+              "    pm.expect(responseJson).to.eql({});",
+              "});",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseURL}}/reviews/clrev0001",
+          "host": ["{{baseURL}}"],
+          "path": ["reviews", "clrev0001"]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "const baseUrl = pm.environment.get(\"baseURL\") || pm.variables.get(\"baseURL\");",
+          "",
+          "// Build your reset endpoint",
+          "const resetUrl = `${baseUrl}/reset-db`;",
+          "",
+          "pm.sendRequest({",
+          "    url: resetUrl,",
+          "    method: \"POST\"",
+          "}, function (err, res) {",
+          "    if (err) {",
+          "        console.error(\"Error resetting DB:\", err);",
+          "    } else {",
+          "        console.log(\"Database reset:\", res.status, res.statusText);",
+          "    }",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": ""
+    }
+  ]
+}

@@ -1,15 +1,29 @@
 {
-  "name": "elysia-app",
-  "version": "1.0.50",
+  "name": "books-api-elysia",
+  "module": "index.ts",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "api-test": "npx newman run ./Books-API.postman_collection.json -e local_env.json",
+    "tsc": "tsc",
+    "check": "biome check --write",
+    "test": "bun test ./tests",
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cors": "latest",
+    "@elysiajs/openapi": "latest",
+    "@prisma/adapter-pg": "7.4.2",
+    "@prisma/client": "7.4.2",
+    "dotenv": "17.3.1",
+    "elysia": "latest",
+    "logixlysia": "^6.10.1",
+    "zod": "4.3.6"
   },
   "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+    "@biomejs/biome": "2.4.4",
+    "@types/bun": "latest",
+    "prisma": "7.4.2",
+    "typescript": "5.9.3"
+  }
 }
